@@ -27,13 +27,14 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       className={`${geistMono.variable} h-full w-full antialiased`}
     >
       <body className="min-h-full">
-        <SidebarProvider>
+      <SidebarProvider>
+        <LeftBar />
+
+        <div className="flex min-w-0 flex-1 flex-col">
           <AppHeader links={links} />
-          <div>
-            <LeftBar />
-            <main>{children}</main>
-          </div>
-        </SidebarProvider>
+          <main className="flex-1">{children}</main>
+        </div>
+      </SidebarProvider>
       </body>
     </html>
   );
