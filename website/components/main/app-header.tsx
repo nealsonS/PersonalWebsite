@@ -5,7 +5,7 @@ import { Separator } from "@/components/ui/separator";
 import { SidebarTrigger } from "@/components/ui/sidebar";
 import { cn } from "@/lib/utils";
 
-type NavLink = {
+export type NavLink = {
   name: string;
   href: string;
 };
@@ -13,7 +13,7 @@ type NavLink = {
 type AppHeaderProps = {
   links: NavLink[];
 };
-export default function AppHeader({ links }: AppHeaderProps) {
+export function AppHeader({ links }: AppHeaderProps) {
   return (
     <header className="bg-background sticky top-0 z-50 flex h-14 w-full shrink-0 items-center gap-2 border-b px-4">
       <SidebarTrigger className="-ml-1" />
