@@ -2,6 +2,7 @@ import type { SVGProps } from "react";
 import {
   BriefcaseBusiness,
   CalendarDays,
+  GraduationCap,
   Cpu,
   Database,
   ScanEye,
@@ -85,8 +86,128 @@ export function AboutMeBody() {
   );
 }
 
+const education = [
+  {
+    school: "University of Southern California",
+    degree: "M.S. in Applied Data Science",
+    level: "Master’s degree",
+    dates: "August 2023 – May 2025",
+    location: "Los Angeles, California",
+    coursework: [
+      "Computer Vision",
+      "Natural Language Processing",
+      "Generative AI & Large Language Models",
+      "Data Mining with Apache Spark",
+      "Recommender Systems",
+    ],
+    tools: [
+      "PyTorch",
+      "Keras / TensorFlow",
+      "LangChain",
+      "SQL",
+      "MongoDB",
+      "Firebase",
+      "DynamoDB",
+    ],
+  },
+  {
+    school: "University of California, Santa Barbara",
+    degree: "B.S. in Statistics & Data Science",
+    level: "Bachelor’s degree",
+    dates: "September 2021 – June 2023",
+    location: "Santa Barbara, California",
+    coursework: [
+      "Statistical Machine Learning",
+      "Algorithms & Data Structures",
+      "Time Series",
+      "Data Visualization",
+      "Stochastic Processes",
+      "Probability Theory",
+      "Regression Analysis",
+      "Design of Statistical Experiments",
+    ],
+    tools: ["Python", "R", "SQL", "SAS"],
+  },
+];
+
 export function EducationBody() {
-  return <>Education</>;
+  return (
+    <ol className="mt-8 space-y-6">
+      {education.map((school, index) => (
+        <li key={school.school}>
+          <article aria-labelledby={`degree-${index}`}>
+            <Card className="[--card-spacing:--spacing(5)] sm:[--card-spacing:--spacing(6)]">
+              <CardHeader className="gap-4">
+                <div className="flex items-center justify-between gap-3">
+                  <div className="bg-muted text-muted-foreground flex size-10 items-center justify-center rounded-xl border">
+                    <GraduationCap className="size-5" aria-hidden="true" />
+                  </div>
+                  <Badge variant="secondary" className="font-code text-[11px]">
+                    {school.level}
+                  </Badge>
+                </div>
+                <div className="space-y-1.5">
+                  <CardTitle className="text-xl font-semibold tracking-tight sm:text-2xl">
+                    <h3 id={`degree-${index}`}>{school.degree}</h3>
+                  </CardTitle>
+                  <CardDescription className="text-foreground/80 font-medium">
+                    {school.school}
+                  </CardDescription>
+                </div>
+                <div className="text-muted-foreground flex flex-wrap gap-x-5 gap-y-2 text-xs">
+                  <p className="flex items-center gap-1.5">
+                    <CalendarDays
+                      className="size-3.5 shrink-0"
+                      aria-hidden="true"
+                    />
+                    {school.dates}
+                  </p>
+                  <p className="flex items-center gap-1.5">
+                    <MapPin className="size-3.5 shrink-0" aria-hidden="true" />
+                    {school.location}
+                  </p>
+                </div>
+              </CardHeader>
+              <CardContent className="space-y-3">
+                <h4 className="text-muted-foreground font-code text-[11px] uppercase tracking-widest">
+                  Relevant coursework
+                </h4>
+                <ul className="flex flex-wrap gap-2">
+                  {school.coursework.map((course) => (
+                    <li key={course}>
+                      <Badge
+                        variant="secondary"
+                        className="h-auto whitespace-normal rounded-md py-1 text-xs"
+                      >
+                        {course}
+                      </Badge>
+                    </li>
+                  ))}
+                </ul>
+              </CardContent>
+              <CardFooter>
+                <ul
+                  className="flex flex-wrap gap-2"
+                  aria-label="Languages and tools"
+                >
+                  {school.tools.map((tool) => (
+                    <li key={tool}>
+                      <Badge
+                        variant="outline"
+                        className="bg-background h-auto whitespace-normal rounded-md py-1 font-code text-[11px]"
+                      >
+                        {tool}
+                      </Badge>
+                    </li>
+                  ))}
+                </ul>
+              </CardFooter>
+            </Card>
+          </article>
+        </li>
+      ))}
+    </ol>
+  );
 }
 
 const workExperience = [
