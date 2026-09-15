@@ -1,6 +1,22 @@
 import type { SVGProps } from "react";
-import { BriefcaseBusiness, MapPin } from "lucide-react";
+import {
+  BriefcaseBusiness,
+  CalendarDays,
+  Cpu,
+  Database,
+  ScanEye,
+  MapPin,
+} from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { Badge } from "@/components/ui/badge";
+import {
+  Card,
+  CardHeader,
+  CardTitle,
+  CardDescription,
+  CardContent,
+  CardFooter,
+} from "@/components/ui/card";
 
 function Github(props: SVGProps<SVGSVGElement>) {
   return (
@@ -73,6 +89,146 @@ export function EducationBody() {
   return <>Education</>;
 }
 
+const workExperience = [
+  {
+    company: "USC Integrated Media Systems Center",
+    icon: ScanEye,
+    category: "Research",
+    current: true,
+    role: "Research Assistant",
+    dates: "January 2024 – Present",
+    location: "Los Angeles, California",
+    highlights: [
+      "Researching computer vision under Prof. Seon Kim, focusing on object detection for real-world transportation applications.",
+    ],
+    technologies: ["Computer Vision", "Object Detection"],
+  },
+  {
+    company: "LG Ads Solutions",
+    icon: Database,
+    category: "Data & Analytics",
+    current: false,
+    role: "Jr. Business Analyst",
+    dates: "June 2025 – May 2026",
+    location: "Los Angeles, California",
+    highlights: [
+      "Built 15+ analytics pipelines in PySpark and Databricks, transforming raw data into Delta Lake tables for cross-functional dashboards and leadership reporting.",
+      "Resolved data quality issues and documented development practices to standardize pipeline work across the organization.",
+      "Promoted systematic QA and query optimization through execution plan analysis, caching, and vectorization.",
+    ],
+    technologies: ["PySpark", "Databricks", "Delta Lake", "Data Quality"],
+  },
+  {
+    company: "Kristal.AI",
+    icon: Cpu,
+    category: "AI & Product",
+    current: false,
+    role: "Tech Product Intern",
+    dates: "July 2024 – September 2024",
+    location: "Singapore, Singapore",
+    highlights: [
+      "Built a RAG chatbot for confidential document search using quantized LLMs, PostgreSQL, Milvus, and custom LangChain retrievers, achieving 80% query-routing accuracy.",
+      "Delivered the chatbot through a Dockerized Streamlit interface and analyzed investor segments using clustering, dimensionality reduction, and Random Forest feature importance.",
+      "Fixed financial options simulation logic and validated simulated versus actual profit and loss with matplotlib visualizations.",
+    ],
+    technologies: ["LangChain", "PostgreSQL", "Milvus", "Docker", "Streamlit"],
+  },
+];
+
 export function ExperienceBody() {
-  return <>Experience</>;
+  return (
+    <div className="mt-4 space-y-8">
+      <p className="text-muted-foreground max-w-xl text-sm leading-relaxed">
+        From computer vision research to analytics pipelines and applied AI.
+      </p>
+      <ol className="relative space-y-6 before:absolute before:inset-y-6 before:left-5 before:w-px before:bg-border sm:before:left-6">
+        {workExperience.map((job, index) => (
+          <li key={job.company} className="relative pl-14 sm:pl-18">
+            <div className="bg-background text-muted-foreground absolute left-0 top-6 flex size-10 items-center justify-center rounded-xl border sm:size-12">
+              <job.icon className="size-5" aria-hidden="true" />
+            </div>
+            <article aria-labelledby={`job-${index}`}>
+              <Card className="[--card-spacing:--spacing(5)] sm:[--card-spacing:--spacing(6)]">
+                <CardHeader className="gap-4">
+                  <div className="flex flex-wrap items-center justify-between gap-2">
+                    <span className="text-muted-foreground font-code text-[11px] uppercase tracking-widest">
+                      {String(index + 1).padStart(2, "0")} / {job.category}
+                    </span>
+                    {job.current && (
+                      <Badge
+                        variant="outline"
+                        className="gap-1.5 border-emerald-600/25 bg-emerald-500/10 text-emerald-700 dark:text-emerald-400"
+                      >
+                        <span
+                          className="size-1.5 rounded-full bg-current"
+                          aria-hidden="true"
+                        />
+                        Current
+                      </Badge>
+                    )}
+                  </div>
+                  <div className="space-y-1.5">
+                    <CardTitle className="text-xl font-semibold tracking-tight sm:text-2xl">
+                      <h3 id={`job-${index}`}>{job.role}</h3>
+                    </CardTitle>
+                    <CardDescription className="text-foreground/80 font-medium">
+                      {job.company}
+                    </CardDescription>
+                  </div>
+                  <div className="text-muted-foreground flex flex-wrap gap-x-5 gap-y-2 text-xs">
+                    <p className="flex items-center gap-1.5">
+                      <CalendarDays
+                        className="size-3.5 shrink-0"
+                        aria-hidden="true"
+                      />
+                      {job.dates}
+                    </p>
+                    <p className="flex items-center gap-1.5">
+                      <MapPin
+                        className="size-3.5 shrink-0"
+                        aria-hidden="true"
+                      />
+                      {job.location}
+                    </p>
+                  </div>
+                </CardHeader>
+                <CardContent>
+                  <ul className="text-muted-foreground space-y-3 text-sm leading-relaxed">
+                    {job.highlights.map((highlight) => (
+                      <li key={highlight} className="flex gap-3">
+                        <span
+                          className="text-foreground/40 mt-0.5 font-code"
+                          aria-hidden="true"
+                        >
+                          ›
+                        </span>
+                        <span>{highlight}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </CardContent>
+                <CardFooter>
+                  <ul
+                    className="flex flex-wrap gap-2"
+                    aria-label="Technologies and focus areas"
+                  >
+                    {job.technologies.map((technology) => (
+                      <li key={technology}>
+                        <Badge
+                          variant="outline"
+                          className="bg-background h-auto whitespace-normal rounded-md py-1 font-code text-[11px]"
+                        >
+                          {technology}
+                        </Badge>
+                      </li>
+                    ))}
+                  </ul>
+                </CardFooter>
+              </Card>
+            </article>
+          </li>
+        ))}
+      </ol>
+    </div>
+  );
 }

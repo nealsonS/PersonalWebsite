@@ -22,13 +22,13 @@ export default function Home() {
         </h1>
         <AboutMeBody />
       </section>
-      <section aria-labelledby="projects" className="min-h-[70vh]">
+      <section aria-labelledby="experience" className="min-h-[70vh]">
         <h2 id="experience" className="text-3xl font-semibold">
           Experience
         </h2>
         <ExperienceBody />
       </section>
-      <section aria-labelledby="experience" className="min-h-[70vh]">
+      <section aria-labelledby="education" className="min-h-[70vh]">
         <h2 id="education" className="text-3xl font-semibold">
           Education
         </h2>
